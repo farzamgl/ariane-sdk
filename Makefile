@@ -86,7 +86,12 @@ pk: install-dir $(RISCV)/bin/riscv64-unknown-linux-gnu-gcc
 	make install;\
 	cd $(ROOT)
 
-all: gnu-toolchain-libc fesvr isa-sim tests pk
+dramsim2:
+	make -C DRAMSim2 libdramsim.so
+	cp DRAMSim2/libdramsim.so $(RISCV)/lib
+	cp DRAMSim2/*.h $(RISCV)/include
+
+all: gnu-toolchain-libc fesvr isa-sim tests pk dramsim2
 
 # benchmark for the cache subsystem
 cachetest:
